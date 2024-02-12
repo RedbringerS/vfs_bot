@@ -126,7 +126,7 @@ def record_person(sb):
 
 
 async def main_script(user_id):
-    with SB(uc=True, test=True) as sb:
+    with SB(uc=True, test=True, headless=True) as sb:
         try:
             open_the_turnstile_page(sb)
 

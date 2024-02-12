@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:postgresql://localhost:5432/vfs_trpl</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="vfs_trpl@185.237.96.216" uuid="4e0f9f4b-0a12-469b-a18b-f9f894c3a62e">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://185.237.96.216:5432/vfs_trpl</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>
