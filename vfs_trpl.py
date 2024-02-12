@@ -53,6 +53,7 @@ def login(sb):
         try:
             sb.press_keys("#mat-input-0", EMAIL)
             sb.press_keys("#mat-input-1", PASSWORD)
+            sb.save_screenshot("screen2.png")
             if check_button_sigIn(sb):
                 sb.driver.uc_click('button.mat-stroked-button')
                 logging.info("Вход в аккаунт успешен")
@@ -61,7 +62,7 @@ def login(sb):
         except NoSuchElementException:
             logging.error("Ошибка авторизации. Повторная попытка...")
     logging.info("Превышено максимальное количество попыток авторизации. Завершение скрипта.")
-    sb.save_screenshot("screen2.png")
+
     return False
 
 
