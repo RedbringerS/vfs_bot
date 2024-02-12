@@ -23,6 +23,7 @@ DB_CONFIG = {
 
 
 async def save_execution_result_to_db(info_message, user_id):
+    logging.info(f"Приступил к сохранению в БД : {info_message}")
     async with asyncpg.create_pool(**DB_CONFIG) as pool:
         async with pool.acquire() as conn:
             async with conn.transaction():
@@ -31,15 +32,19 @@ async def save_execution_result_to_db(info_message, user_id):
 
 
 def open_the_turnstile_page(sb):
+    logging.info("Открываю сайт VFS")
     sb.driver.uc_open_with_reconnect(VFS_URL, reconnect_time=3.5)
+    sb.save_screenshot("screen.png")
 
 
 def click_turnstile_and_verify(sb):
+    logging.info("Ищу турникет")
     sb.driver.uc_switch_to_frame("iframe")
     sb.driver.uc_click("span.mark")
 
 
 def login(sb):
+    logging.info("Начинаю процесс авторизации")
     for _ in range(MAX_RETRIES):
         try:
             sb.press_keys("#mat-input-0", EMAIL)
@@ -56,6 +61,7 @@ def login(sb):
 
 
 def check_button_sigIn(sb):
+    logging.info("Проверка доступности кнопки входа")
     try:
         sb.wait_for_element_visible('button.mat-stroked-button:not([disabled])', timeout=10)
         logging.info("Кнопка 'Sign In' доступна.")
@@ -66,6 +72,7 @@ def check_button_sigIn(sb):
 
 
 def check_slot(sb):
+    logging.info("Проверка свободного слота")
     try:
         accept_cookie_button = sb.wait_for_element("#onetrust-accept-btn-handler", timeout=5)
         sb.execute_script("arguments[0].scrollIntoView(true);", accept_cookie_button)
@@ -97,6 +104,7 @@ def check_slot(sb):
 
 
 def check_continue_button(sb):
+    logging.info("Проверка доступности кнопки запись")
     try:
         sb.wait_for_element_visible('button.mat-raised-button:not([disabled])', timeout=10)
         logging.info("Кнопка 'Continue' доступна.")
@@ -107,6 +115,8 @@ def check_continue_button(sb):
 
 
 def record_person(sb):
+    logging.info("Запись на подачу")
+
     sb.driver.uc_click('button.mat-raised-button')
 
     sb.press_keys("#mat-input-2", EMAIL)  # MIGRIS
