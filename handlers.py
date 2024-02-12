@@ -14,7 +14,7 @@ from states import Gen
 from vfs_trpl import main_script, DB_CONFIG
 
 router = Router()
-SCRIPT_INTERVAL = 600
+SCRIPT_INTERVAL = 10
 user_states = {}
 
 
