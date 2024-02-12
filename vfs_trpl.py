@@ -1,5 +1,7 @@
 import asyncio
 import logging
+import time
+
 import asyncpg
 from datetime import datetime
 from aiogram.fsm.context import FSMContext
@@ -34,11 +36,13 @@ async def save_execution_result_to_db(info_message, user_id):
 def open_the_turnstile_page(sb):
     logging.info("Открываю сайт VFS")
     sb.driver.uc_open_with_reconnect(VFS_URL, reconnect_time=6.5)
+    time.sleep(5)
     sb.save_screenshot("screen.png")
 
 
 def click_turnstile_and_verify(sb):
     logging.info("Ищу турникет")
+    sb.save_screenshot("screen1.png")
     sb.driver.uc_switch_to_frame("iframe")
     sb.driver.uc_click("span.mark")
 
