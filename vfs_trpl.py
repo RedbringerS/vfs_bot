@@ -61,6 +61,7 @@ def login(sb):
         except NoSuchElementException:
             logging.error("Ошибка авторизации. Повторная попытка...")
     logging.info("Превышено максимальное количество попыток авторизации. Завершение скрипта.")
+    sb.save_screenshot("screen2.png")
     return False
 
 
